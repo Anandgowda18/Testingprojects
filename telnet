@@ -1,0 +1,20 @@
+import telnetlib as tl
+import re
+
+con = tl.Telnet('IP address')
+con.read_until(b'Username: ')
+
+con.write(b"username")
+con.read_until(b"Password: ")
+
+con.write(b"password")
+
+con.write(b'sql query')
+con.write(b"sql query';\r")
+con.write(b'sql query;\r')
+
+con.write(b'sql query\r')
+res = con.read_until(b'selected')
+print (res.decode('ASCII'))
+
+con.close()
